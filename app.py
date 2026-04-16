@@ -14,8 +14,11 @@ USER_MAP = {
 def home():
     return "Webhook running"
 
-@app.route("/webhook", methods=["POST"])
+@app.route("/webhook", methods=["POST", "HEAD", "GET"])
 def webhook():
+    if request.method in ["GET", "HEAD"]:
+        return "", 200
+
     data = request.json
     print(data)
 
