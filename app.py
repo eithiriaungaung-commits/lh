@@ -7,9 +7,9 @@ app = Flask(__name__)
 BOT_TOKEN = "8694124474:AAFSPgMvgRlOKFiWC8ARdB1jnb8tMG4hkkQ"
 
 USER_MAP = {
-    "69ba04dd6dfc6f22c864f8f9": "你的TelegramChatID"
+    "69ba04dd6dfc6f22c864f8f9": "8389172298",   # 最高管理员
+    "69e0abc12345def67890abcd": "6880265987"    # sanaung 9
 }
-
 @app.route("/", methods=["GET"])
 def home():
     return "Webhook running"
@@ -32,13 +32,13 @@ def webhook():
         chat_id = USER_MAP.get(member_id)
 
         if chat_id:
-            requests.post(
-                f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
-                json={
-                    "chat_id": chat_id,
-                    "text": f"你有新的 Trello 任务：{card_name}"
-                }
-            )
+           requests.post(
+    f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+    json={
+        "chat_id": chat_id,
+        "text": f"📌 新任务已分配\n任务：{card_name}\n负责人：{member_id}"
+    }
+)
 
     return "ok", 200
 
