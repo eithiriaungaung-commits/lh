@@ -1,12 +1,13 @@
 from flask import Flask, request
 import requests
+import os
 
 app = Flask(__name__)
 
 BOT_TOKEN = "8694124474:AAFSPgMvgRlOKFiWC8ARdB1jnb8tMG4hkkQ"
 
 USER_MAP = {
-    "69ba04dd6dfc6f22c864f8f9": "你的telegram_chat_id"
+    "69ba04dd6dfc6f22c864f8f9": "你的TelegramChatID"
 }
 
 @app.route("/", methods=["GET"])
@@ -39,4 +40,5 @@ def webhook():
     return "ok", 200
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
